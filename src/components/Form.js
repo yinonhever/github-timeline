@@ -2,6 +2,7 @@ import React, { useState } from "react";
 
 const Form = props => {
     const [username, setUsername] = useState("");
+    const [error, setError] = useState(false);
 
     const changeHandler = event => {
         setUsername(event.target.value);
@@ -9,8 +10,15 @@ const Form = props => {
 
     const submitHandler = event => {
         event.preventDefault();
-        setUsername("");
-        props.submit(username);
+
+        if (username !== "") {
+            setUsername("");
+            setError(false);
+            props.submit(username);
+        }
+        else {
+            setError(true);
+        }
     }
 
     return (

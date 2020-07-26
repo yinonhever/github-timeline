@@ -20,7 +20,7 @@ const Layout = () => {
         setError(false);
         setUsername(input);
 
-        axios.get("https://api.github.com/users/" + input + "/repos")
+        axios.get("https://api.github.com/users/" + input + "/repos?page=18&per_page=100")
             .then(response => {
                 setLoading(false);
                 const newRepos = response.data;
@@ -61,6 +61,7 @@ const Layout = () => {
 
         newYearsArray.sort((a, b) => a.year - b.year);
         setYears(newYearsArray);
+        console.log(newRepos, newYearsArray)
     }
 
     const mainContent = () => {

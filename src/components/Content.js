@@ -1,9 +1,9 @@
 import React from "react";
 
-const Tabs = props => {
+const Content = props => {
     return (
         props.reposData.map(repo => (
-            <div style={{ margin: "3rem" }}>
+            <div key={repo.id} style={{ margin: "3rem" }}>
                 <h2>{repo.name}</h2>
                 <p>{repo.description}</p>
             </div>
@@ -11,4 +11,4 @@ const Tabs = props => {
     )
 }
 
-export default Tabs;
+export default Content;
