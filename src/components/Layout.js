@@ -20,7 +20,7 @@ const Layout = () => {
         setError(false);
         setUsername(input);
 
-        axios.get("https://api.github.com/users/" + input + "/repos?page=18&per_page=100")
+        axios.get("https://api.github.com/users/" + input + "/repos?page=1&per_page=100")
             .then(response => {
                 setLoading(false);
                 const newRepos = response.data;
