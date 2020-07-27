@@ -9,11 +9,8 @@ const Form = props => {
 
     const submitHandler = event => {
         event.preventDefault();
-
-        if (username !== "") {
-            props.submit(username);
-            setUsername("");
-        }
+        props.submit(username);
+        setUsername("");
     }
 
     return (

@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import usePersistedState from "../usePersistedState";
 import axios from "axios";
 import Aux from "../hoc/Auxilliary";
 import Header from "./Header";
@@ -6,6 +7,7 @@ import Username from "./Username";
 import Content from "./Content";
 import Spinner from "./Spinner";
 import Error from "./Error";
+import History from "./History";
 
 const Layout = () => {
     const [repos, setRepos] = useState(null);
@@ -13,11 +15,12 @@ const Layout = () => {
     const [username, setUsername] = useState(null);
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(false);
+    const [history, setHistory] = usePersistedState("history", []);
+    const [modalActive, setModalActive] = useState(false);
 
     const submitHandler = input => {
         setRepos(null);
         setLoading(true);
-        setError(false);
         setUsername(input);
 
         axios.get("https://api.github.com/users/" + input + "/repos?page=1&per_page=100")
@@ -27,6 +30,7 @@ const Layout = () => {
                 newRepos.sort((a, b) => new Date(b.created_at) - new Date(a.created_at));
                 setRepos(newRepos);
                 createYearsData(newRepos);
+                updateHistory(input);
 
                 if (newRepos.length > 0) {
                     setError(false);
@@ -49,10 +53,7 @@ const Layout = () => {
             const existingYearItem = newYearsArray.find(item => item.year === year);
             if (existingYearItem) {
                 const index = newYearsArray.indexOf(existingYearItem);
-                newYearsArray[index] = {
-                    year: year,
-                    count: newYearsArray[index].count + 1
-                }
+                newYearsArray[index].count++;
             }
             else {
                 newYearsArray.push({ year: year, count: 1 });
@@ -61,7 +62,16 @@ const Layout = () => {
 
         newYearsArray.sort((a, b) => a.year - b.year);
         setYears(newYearsArray);
-        console.log(newRepos, newYearsArray)
+    }
+
+    const updateHistory = input => {
+        const newHistory = history.filter(item => item.name !== input);
+        newHistory.push({ name: input, date: new Date() });
+        setHistory(newHistory);
+    }
+
+    const modalHandler = () => {
+        setModalActive(!modalActive);
     }
 
     const mainContent = () => {
@@ -80,9 +90,15 @@ const Layout = () => {
 
     return (
         <Aux>
-            <Header onFormSubmit={submitHandler} />
+            <Header onFormSubmit={submitHandler} onShowHistory={modalHandler} />
             <Username name={username} />
             {mainContent()}
+            <History
+                active={modalActive}
+                closed={modalHandler}
+                history={history}
+                itemClicked={submitHandler}
+            />
         </Aux>
     )
 }
