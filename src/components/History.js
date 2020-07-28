@@ -12,7 +12,7 @@ const History = props => {
         list.sort((a, b) => new Date(b.date) - new Date(a.date));
     }
 
-    const listByDate = () => {
+    const historyContent = () => {
         const dates = [];
         props.history.forEach(historyItem => {
             const date = moment(historyItem.date).format("LL");
@@ -45,7 +45,7 @@ const History = props => {
 
     return (
         <div>
-            {listByDate()}
+            {historyContent()}
         </div>
     )
 }

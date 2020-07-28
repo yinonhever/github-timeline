@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import usePersistedState from "../usePersistedState";
 import axios from "axios";
 import Aux from "../hoc/Auxilliary";
@@ -17,6 +17,10 @@ const Layout = () => {
     const [error, setError] = useState(false);
     const [history, setHistory] = usePersistedState("history", []);
     const [modalActive, setModalActive] = useState(false);
+
+    useEffect(() => {
+        console.log(history);
+    }, [history])
 
     const submitHandler = input => {
         setRepos(null);
@@ -74,11 +78,11 @@ const Layout = () => {
         setModalActive(!modalActive);
     }
 
-    const historyDeleteHandler = name => {
+    const itemDeleteHandler = name => {
         setHistory(history => history.filter(item => item.name !== name));
     }
 
-    const historyClearHandler = () => {
+    const clearHandler = () => {
         setHistory([]);
     }
 
@@ -99,16 +103,16 @@ const Layout = () => {
     return (
         <Aux>
             <Header onFormSubmit={submitHandler} onShowHistory={modalHandler} />
-            <Username name={username} />
+            {!loading ? <Username name={username} /> : null}
             {mainContent()}
-            <History
+            {/* <History
                 active={modalActive}
                 closed={modalHandler}
                 history={history}
                 itemClicked={submitHandler}
-                itemDeleted={historyDeleteHandler}
-                cleared={historyClearHandler}
-            />
+                itemDeleted={itemDeleteHandler}
+                cleared={clearHandler}
+            /> */}
         </Aux>
     )
 }
