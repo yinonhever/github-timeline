@@ -74,6 +74,14 @@ const Layout = () => {
         setModalActive(!modalActive);
     }
 
+    const historyDeleteHandler = name => {
+        setHistory(history => history.filter(item => item.name !== name));
+    }
+
+    const historyClearHandler = () => {
+        setHistory([]);
+    }
+
     const mainContent = () => {
         if (loading) {
             return <Spinner />
@@ -98,6 +106,8 @@ const Layout = () => {
                 closed={modalHandler}
                 history={history}
                 itemClicked={submitHandler}
+                itemDeleted={historyDeleteHandler}
+                cleared={historyClearHandler}
             />
         </Aux>
     )

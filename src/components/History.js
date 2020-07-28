@@ -1,5 +1,6 @@
 import React from "react";
 import moment from "moment";
+import HistoryItem from "./HistoryItem";
 
 const History = props => {
     const itemClickHandler = name => {
@@ -13,7 +14,6 @@ const History = props => {
 
     const listByDate = () => {
         const dates = [];
-
         props.history.forEach(historyItem => {
             const date = moment(historyItem.date).format("LL");
             const existingDateItem = dates.find(dateItem => dateItem.date === date);
@@ -26,17 +26,18 @@ const History = props => {
                 dates.push({ date: date, items: [historyItem] });
             }
         })
-
         sortByDate(dates);
 
         return dates.map(dateItem => (
             <div className="history__section" key={dateItem.date}>
                 <h3 className="history__date">{dateItem.date}</h3>
                 {dateItem.items.map(historyItem => (
-                    <p className="history__item" key={historyItem.name}
-                        onClick={() => itemClickHandler(historyItem.name)}>
-                        {historyItem.name}
-                    </p>
+                    <HistoryItem
+                        key={historyItem.name}
+                        item={historyItem.name}
+                        clicked={itemClickHandler}
+                        onDelete={props.itemDeleted}
+                    />
                 ))}
             </div>
         ))
