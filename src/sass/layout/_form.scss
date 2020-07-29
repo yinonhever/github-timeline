@@ -1,0 +1,67 @@
+.form {
+  width: 100%;
+  max-width: 60rem;
+  height: 15rem;
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: $color-primary;
+  box-shadow: rgba(0, 0, 0, 0.06) 0px 1px 1px 1px;
+  border-radius: 10px;
+
+  &__content {
+    position: absolute;
+    top: 50%;
+    left: 4rem;
+    right: 4rem;
+    transform: translateY(-50%);
+    display: flex;
+  }
+
+  &__input-wrapper {
+    flex: 1;
+    margin-right: 4rem;
+    position: relative;
+
+    &::before, &::after {
+      content: "";
+      position: absolute;
+      bottom: 0;
+      height: 2px;
+      background-color: $color-azure;
+      width: 0;
+      transition: width 0.4s;
+    }
+
+    &::before {
+      left: 0;
+    }
+
+    &::after {
+      right: 0;
+    }
+
+    &.focused::before, &.focused::after {
+      width: 50%;
+    }
+  }
+
+  &__input {
+    height: 100%;
+    width: 100%;
+    font: inherit;
+    color: inherit;
+    background-color: transparent;
+    border: none;
+    border-bottom: 1px solid #fff;
+    outline: none;
+    padding: 1.5rem;
+    transition: all 0.5s;
+
+    &::placeholder {
+      color: currentColor;
+      opacity: 0.3;
+    }
+  }
+}

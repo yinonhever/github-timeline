@@ -1,16 +1,22 @@
 import React from "react";
-import Zoom from "react-reveal/Zoom";
 
 const Error = props => {
-    let content;
-    if(props.invalid) {
-        content = <p style={{width: "100%", textAlign: "center"}}>Oops! Looks like the username is invalid.</p>
-    }
-    else {
-        content = <p style={{width: "100%", textAlign: "center"}}>This user has no public repositories.</p>
+    let classes = ["error"];
+    let icon = "fas fa-search";
+    let text = "This user has no public repositories.";
+
+    if (props.invalid) {
+        classes.push("error--invalid");
+        icon = "fas fa-exclamation-circle";
+        text = "Oops! Looks like the username is invalid.";
     }
 
-    return <Zoom duration={400}>{content}</Zoom>;
+    return (
+        <div className={classes.join(" ")}>
+            <i className={"error__icon " + icon} />
+            <p className="error__text">{text}</p>
+        </div>
+    );
 }
 
 export default Error;

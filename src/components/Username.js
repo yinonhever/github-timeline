@@ -2,10 +2,11 @@ import React from "react";
 
 const Username = props => (
     props.name ?
-        <div style={{ width: "100%", textAlign: "center" }}>
-            <h1 style={{ padding: "1.5rem", margin: "3rem", border: "1px solid", display: "inline-block" }}>
-                {props.name}
-            </h1>
+        <div className="username-wrapper">
+            <div className="username">
+                <h1 className="username__text">{props.name}</h1>
+                <div className="username__line" />
+            </div>
         </div> :
         null
 )

@@ -43,11 +43,7 @@ const History = props => {
         ))
     }
 
-    return (
-        <div>
-            {historyContent()}
-        </div>
-    )
+    return historyContent();
 }
 
 export default History;

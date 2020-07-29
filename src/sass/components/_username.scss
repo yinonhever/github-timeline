@@ -1,0 +1,26 @@
+.username-wrapper {
+  text-align: center;
+  padding: 0 $padding-side-mobile;
+  margin-bottom: 8rem;
+}
+
+.username {
+  display: inline-block;
+  position: relative;
+
+  &__text {
+    font-size: 4.5rem;
+    font-weight: 800;
+  }
+
+  &__line {
+    position: absolute;
+    top: calc(100% + 1rem);
+    left: 50%;
+    transform: translateX(-50%);
+    width: 60%;
+    max-width: 12rem;
+    height: 5px;
+    background-color: $color-azure;
+  }
+}

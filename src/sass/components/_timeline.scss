@@ -1,0 +1,113 @@
+.timeline {
+  max-width: 120rem;
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+
+  &::after {
+    content: "";
+    position: absolute;
+    left: 50%;
+    top: 0;
+    bottom: 0;
+    transform: translateX(-50%);
+    width: 0.6rem;
+    background-color: $color-primary;
+  }
+
+  &__side {
+    width: 50%;
+    padding: 2rem 4rem;
+    position: relative;
+
+    &::after {
+      content: "";
+      position: absolute;
+      bottom: 5rem;
+      width: 2.5rem;
+      height: 2.5rem;
+      background-color: $color-primary;
+      border: 4px solid $color-azure;
+      border-radius: 50%;
+      z-index: 1;
+    }
+
+    &.left {
+      align-self: flex-start;
+
+      &::after {
+        right: 0;
+        transform: translateX(50%);
+      }
+    }
+
+    &.right {
+      align-self: flex-end;
+
+      &::after {
+        left: 0;
+        transform: translateX(-50%);
+      }
+    }
+
+    &:first-child {
+      margin-top: 4rem;
+    }
+
+    &:last-child {
+      margin-bottom: 4rem;
+    }
+  }
+
+  &__card {
+    border-radius: 5px;
+    background-color: $color-dark-blue-2;
+    padding: 3rem 3.5rem;
+    box-shadow: rgba(50, 50, 50, 0.14) -2px -4px 6px 1px;
+    word-wrap: break-word;
+    position: relative;
+
+    &::after {
+      content: "";
+      position: absolute;
+      height: 0;
+      width: 0;
+      bottom: 3rem;
+      border: medium solid;
+      z-index: 1;
+    }
+  }
+
+  &__side.left &__card::after {
+    right: -1.2rem;
+    border-width: 1.2rem 0 1.2rem 1.2rem;
+    border-color: transparent transparent transparent $color-dark-blue-2;
+  }
+
+  &__side.right &__card::after {
+    left: -1.2rem;
+    border-width: 1.2rem 1.2rem 1.2rem 0;
+    border-color: transparent $color-dark-blue-2 transparent transparent;
+  }
+
+  &__title {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+  }
+
+  &__date {
+    font-weight: 600;
+    font-size: 1.3rem;
+  }
+
+  &__description {
+    margin: 2.5rem 0;
+    font-size: 1.5rem;
+    line-height: 1.6;
+  }
+
+  .button {
+    font-weight: 600;
+  }
+}

@@ -4,9 +4,11 @@ import Button from "./Button";
 const Form = props => {
     const [username, setUsername] = useState("");
     const [focused, setFocused] = useState(false);
+    const [error, setError] = useState(false);
 
     const changeHandler = event => {
         setUsername(event.target.value);
+        setError(false);
     }
 
     const focusHandler = () => {
@@ -15,8 +17,14 @@ const Form = props => {
 
     const submitHandler = event => {
         event.preventDefault();
-        props.submit(username);
-        setUsername("");
+        
+        if (username !== "") {
+            props.submit(username);
+            setUsername("");
+        }
+        else {
+            setError(true);
+        }
     }
 
     return (

@@ -1,12 +1,10 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import usePersistedState from "../usePersistedState";
 import axios from "axios";
+import moment from "moment";
 import Aux from "../hoc/Auxilliary";
 import Header from "./Header";
-import Username from "./Username";
-import Content from "./Content";
-import Spinner from "./Spinner";
-import Error from "./Error";
+import Main from "./Main";
 import History from "./History";
 
 const Layout = () => {
@@ -17,10 +15,6 @@ const Layout = () => {
     const [error, setError] = useState(false);
     const [history, setHistory] = usePersistedState("history", []);
     const [modalActive, setModalActive] = useState(false);
-
-    useEffect(() => {
-        console.log(history);
-    }, [history])
 
     const submitHandler = input => {
         setRepos(null);
@@ -69,7 +63,9 @@ const Layout = () => {
     }
 
     const updateHistory = input => {
-        const newHistory = history.filter(item => item.name !== input);
+        const newHistory = history.filter(item => 
+            item.name.toLowerCase() !== input.toLowerCase() || 
+            moment(item.date).format("LL") !== moment().format("LL"));
         newHistory.push({ name: input, date: new Date() });
         setHistory(newHistory);
     }
@@ -79,40 +75,25 @@ const Layout = () => {
     }
 
     const itemDeleteHandler = name => {
-        setHistory(history => history.filter(item => item.name !== name));
+        setHistory(history => history.filter(item => item.name.toLowerCase() !== name.toLowerCase()));
     }
 
     const clearHandler = () => {
         setHistory([]);
     }
 
-    const mainContent = () => {
-        if (loading) {
-            return <Spinner />
-        }
-        else {
-            if (error) {
-                return <Error invalid={!repos} />
-            }
-            else if (repos) {
-                return <Content reposData={repos} yearsData={years} />
-            }
-        }
-    }
-
     return (
         <Aux>
             <Header onFormSubmit={submitHandler} onShowHistory={modalHandler} />
-            {!loading ? <Username name={username} /> : null}
-            {mainContent()}
-            {/* <History
+            <Main repos={repos} years={years} loading={loading} error={error} username={username} />
+            <History
                 active={modalActive}
                 closed={modalHandler}
                 history={history}
                 itemClicked={submitHandler}
                 itemDeleted={itemDeleteHandler}
                 cleared={clearHandler}
-            /> */}
+            />
         </Aux>
     )
 }

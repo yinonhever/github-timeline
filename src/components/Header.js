@@ -10,7 +10,7 @@ const Header = props => (
             <Button clicked={props.onShowHistory} text="Search history" />
         </div>
         <p className="header__text">
-            Enter a Github username to generate a timeline and a yearly summary of their repositories.
+            Enter a Github username to generate a timeline and a yearly summary of the user's repositories.
             Only public repositories will be displayed.
         </p>
         <Form submit={props.onFormSubmit} />
