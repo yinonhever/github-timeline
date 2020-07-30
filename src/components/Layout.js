@@ -18,29 +18,33 @@ const Layout = () => {
 
     const submitHandler = input => {
         setRepos(null);
-        setLoading(true);
         setUsername(input);
+        setError(false);
 
-        axios.get("https://api.github.com/users/" + input + "/repos?page=1&per_page=100")
-            .then(response => {
-                setLoading(false);
-                const newRepos = response.data;
-                newRepos.sort((a, b) => new Date(b.created_at) - new Date(a.created_at));
-                setRepos(newRepos);
-                createYearsData(newRepos);
-                updateHistory(input);
+        if (input !== "") {
+            setLoading(true);
 
-                if (newRepos.length > 0) {
-                    setError(false);
-                }
-                else {
+            axios.get("https://api.github.com/users/" + input + "/repos?page=1&per_page=100")
+                .then(response => {
+                    setLoading(false);
+                    const newRepos = response.data;
+                    newRepos.sort((a, b) => new Date(b.created_at) - new Date(a.created_at));
+                    setRepos(newRepos);
+                    createYearsData(newRepos);
+                    updateHistory(input);
+
+                    if (newRepos.length > 0) {
+                        setError(false);
+                    }
+                    else {
+                        setError(true);
+                    }
+                })
+                .catch(() => {
+                    setLoading(false);
                     setError(true);
-                }
-            })
-            .catch(() => {
-                setLoading(false);
-                setError(true);
-            })
+                })
+        }
     }
 
     const createYearsData = newRepos => {
@@ -63,8 +67,8 @@ const Layout = () => {
     }
 
     const updateHistory = input => {
-        const newHistory = history.filter(item => 
-            item.name.toLowerCase() !== input.toLowerCase() || 
+        const newHistory = history.filter(item =>
+            item.name.toLowerCase() !== input.toLowerCase() ||
             moment(item.date).format("LL") !== moment().format("LL"));
         newHistory.push({ name: input, date: new Date() });
         setHistory(newHistory);
@@ -84,8 +88,17 @@ const Layout = () => {
 
     return (
         <Aux>
-            <Header onFormSubmit={submitHandler} onShowHistory={modalHandler} />
-            <Main repos={repos} years={years} loading={loading} error={error} username={username} />
+            <Header
+                onFormSubmit={submitHandler}
+                onShowHistory={modalHandler}
+            />
+            <Main
+                repos={repos}
+                years={years}
+                loading={loading}
+                error={error}
+                username={username}
+            />
             <History
                 active={modalActive}
                 closed={modalHandler}

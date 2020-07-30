@@ -1,14 +1,36 @@
 .form {
-  width: 100%;
+  width: 90%;
   max-width: 60rem;
   height: 15rem;
   position: absolute;
   top: 100%;
   left: 50%;
   transform: translate(-50%, -50%);
-  background-color: $color-primary;
+  background-color: $color-blue;
   box-shadow: rgba(0, 0, 0, 0.06) 0px 1px 1px 1px;
-  border-radius: 10px;
+  border-radius: 1rem;
+
+  &::after {
+    content: "Please enter a username";
+    position: absolute;
+    top: calc(100% + 4rem);
+    left: 0;
+    width: 100%;
+    text-align: center;
+    font-weight: 600;
+    color: $color-error;
+    font-size: 1.5rem;
+    visibility: hidden;
+    opacity: 0;
+    transform: translateY(-6rem);
+    transition: all 0.5s;
+  }
+
+  &--error::after {
+    visibility: visible;
+    opacity: 1;
+    transform: translateY(0);
+  }
 
   &__content {
     position: absolute;
@@ -24,7 +46,8 @@
     margin-right: 4rem;
     position: relative;
 
-    &::before, &::after {
+    &::before,
+    &::after {
       content: "";
       position: absolute;
       bottom: 0;
@@ -42,7 +65,8 @@
       right: 0;
     }
 
-    &.focused::before, &.focused::after {
+    &.focused::before,
+    &.focused::after {
       width: 50%;
     }
   }
@@ -63,5 +87,9 @@
       color: currentColor;
       opacity: 0.3;
     }
+  }
+
+  &--error &__input {
+    border-color: $color-error;
   }
 }

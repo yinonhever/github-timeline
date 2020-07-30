@@ -43,7 +43,18 @@ const History = props => {
         ))
     }
 
-    return historyContent();
+    return (
+        <div className={!props.active ? "history" : "history active"}>
+            <div className="history__modal">
+                <div className="history__top">
+
+                </div>
+                <div className="history__content">
+                    {/* {historyContent()} */}
+                </div>
+            </div>
+        </div>
+    )
 }
 
 export default History;

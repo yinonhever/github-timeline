@@ -8,7 +8,9 @@ const Form = props => {
 
     const changeHandler = event => {
         setUsername(event.target.value);
-        setError(false);
+        if (event.target.value.trim() !== "") {
+            setError(false);
+        }
     }
 
     const focusHandler = () => {
@@ -17,19 +19,17 @@ const Form = props => {
 
     const submitHandler = event => {
         event.preventDefault();
+        props.submit(username.trim());
+        setUsername("");
         
-        if (username !== "") {
-            props.submit(username);
-            setUsername("");
-        }
-        else {
+        if (username.trim() === "") {
             setError(true);
         }
     }
 
     return (
-        <form className="form" onSubmit={submitHandler}>
-            <div className="form__content">
+        <form className={!error ? "form" : "form form--error"} onSubmit={submitHandler}>
+            <div className={"form__content"}>
                 <div className={focused ? "form__input-wrapper focused" : "form__input-wrapper"}>
                     <input
                         className="form__input"

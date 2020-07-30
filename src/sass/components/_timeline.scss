@@ -13,7 +13,7 @@
     bottom: 0;
     transform: translateX(-50%);
     width: 0.6rem;
-    background-color: $color-primary;
+    background-color: $color-blue;
   }
 
   &__side {
@@ -21,13 +21,21 @@
     padding: 2rem 4rem;
     position: relative;
 
+    &::before {
+      content: "";
+      position: absolute;
+      width: 0.6rem;
+      height: 4rem;
+      z-index: 2;
+    }
+
     &::after {
       content: "";
       position: absolute;
       bottom: 5rem;
       width: 2.5rem;
       height: 2.5rem;
-      background-color: $color-primary;
+      background-color: $color-blue;
       border: 4px solid $color-azure;
       border-radius: 50%;
       z-index: 1;
@@ -36,6 +44,7 @@
     &.left {
       align-self: flex-start;
 
+      &::before,
       &::after {
         right: 0;
         transform: translateX(50%);
@@ -45,6 +54,7 @@
     &.right {
       align-self: flex-end;
 
+      &::before,
       &::after {
         left: 0;
         transform: translateX(-50%);
@@ -53,15 +63,29 @@
 
     &:first-child {
       margin-top: 4rem;
+
+      &::before {
+        top: -4rem;
+        background-image: linear-gradient(
+          to bottom,
+          $color-azure,
+          $color-blue
+        ) !important;
+      }
     }
 
     &:last-child {
       margin-bottom: 4rem;
+
+      &::before {
+        bottom: -4rem;
+        background-image: linear-gradient(to top, $color-azure, $color-blue);
+      }
     }
   }
 
   &__card {
-    border-radius: 5px;
+    border-radius: 0.8rem;
     background-color: $color-dark-blue-2;
     padding: 3rem 3.5rem;
     box-shadow: rgba(50, 50, 50, 0.14) -2px -4px 6px 1px;
@@ -71,11 +95,8 @@
     &::after {
       content: "";
       position: absolute;
-      height: 0;
-      width: 0;
       bottom: 3rem;
       border: medium solid;
-      z-index: 1;
     }
   }
 
@@ -109,5 +130,33 @@
 
   .button {
     font-weight: 600;
+    width: 20rem;
+    position: relative;
+    transition: all 0.3s;
+
+    &__icon {
+      position: absolute;
+      top: 0;
+      right: 0;
+      height: 100%;
+      width: 5rem;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 1.8rem;
+      text-indent: -3rem;
+      opacity: 0;
+      color: #000;
+      transition: all 0.3s;
+    }
+
+    &:hover {
+      text-indent: -2rem;
+    }
+
+    &:hover .button__icon {
+      opacity: 1;
+      text-indent: 0;
+    }
   }
 }

@@ -2,7 +2,7 @@ import React from "react";
 
 const Spinner = () => (
     <div style={{textAlign: "center"}}>
-        <div class="lds-dual-ring" />
+        <div className="lds-dual-ring" />
     </div>
 )
 
