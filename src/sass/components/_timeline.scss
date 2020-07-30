@@ -118,8 +118,19 @@
   }
 
   &__date {
+    display: flex;
+    align-items: center;
+  }
+
+  &__date-icon {
+    margin-right: 0.8rem;
+    font-size: 1.6rem;
+  }
+
+  &__date-text {
     font-weight: 600;
     font-size: 1.3rem;
+    transform: translateY(1.25px);
   }
 
   &__description {
@@ -151,7 +162,7 @@
     }
 
     &:hover {
-      text-indent: -2rem;
+      text-indent: -2.5rem;
     }
 
     &:hover .button__icon {

@@ -8,17 +8,17 @@ import Main from "./Main";
 import History from "./History";
 
 const Layout = () => {
+    const [user, setUser] = useState(null);
     const [repos, setRepos] = useState(null);
     const [years, setYears] = useState(null);
-    const [username, setUsername] = useState(null);
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(false);
     const [history, setHistory] = usePersistedState("history", []);
     const [modalActive, setModalActive] = useState(false);
 
     const submitHandler = input => {
+        setUser(null);
         setRepos(null);
-        setUsername(input);
         setError(false);
 
         if (input !== "") {
@@ -26,19 +26,25 @@ const Layout = () => {
 
             axios.get("https://api.github.com/users/" + input + "/repos?page=1&per_page=100")
                 .then(response => {
-                    setLoading(false);
-                    const newRepos = response.data;
-                    newRepos.sort((a, b) => new Date(b.created_at) - new Date(a.created_at));
-                    setRepos(newRepos);
-                    createYearsData(newRepos);
-                    updateHistory(input);
+                    axios.get("https://api.github.com/search/users?q=" + input)
+                        .then(res => {
+                            setLoading(false);
+                            const matchingProfile = res.data.items.find(item =>
+                                item.login.toLowerCase() === input.toLowerCase());
+                            setUser({ name: input, avatar: matchingProfile.avatar_url });
+                            const newRepos = response.data;
+                            newRepos.sort((a, b) => new Date(b.created_at) - new Date(a.created_at));
+                            setRepos(newRepos);
+                            createYearsData(newRepos);
+                            updateHistory(input);
 
-                    if (newRepos.length > 0) {
-                        setError(false);
-                    }
-                    else {
-                        setError(true);
-                    }
+                            if (newRepos.length > 0) {
+                                setError(false);
+                            }
+                            else {
+                                setError(true);
+                            }
+                        })
                 })
                 .catch(() => {
                     setLoading(false);
@@ -93,11 +99,11 @@ const Layout = () => {
                 onShowHistory={modalHandler}
             />
             <Main
+                user={user}
                 repos={repos}
                 years={years}
                 loading={loading}
                 error={error}
-                username={username}
             />
             <History
                 active={modalActive}

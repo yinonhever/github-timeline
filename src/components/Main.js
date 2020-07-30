@@ -1,5 +1,5 @@
 import React from "react";
-import Username from "./Username";
+import User from "./User";
 import Content from "./Content";
 import Spinner from "./Spinner";
 import Error from "./Error";
@@ -21,8 +21,8 @@ const Main = props => {
 
     return (
         <main className="main">
-            {!props.loading && props.repos ?
-                <Username name={props.username} /> : null}
+            {!props.loading && props.user ?
+                <User name={props.user.name} avatar={props.user.avatar} /> : null}
             {mainContent()}
         </main>
     )
