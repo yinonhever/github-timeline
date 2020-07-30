@@ -1,4 +1,5 @@
 import React from "react";
+import Fade from "react-reveal/Fade";
 
 const Error = props => {
     let classes = ["error"];
@@ -12,10 +13,12 @@ const Error = props => {
     }
 
     return (
-        <div className={classes.join(" ")}>
-            <i className={"error__icon " + icon} />
-            <p className="error__text">{text}</p>
-        </div>
+        <Fade bottom duration={500}>
+            <div className={classes.join(" ")}>
+                <i className={"error__icon " + icon} />
+                <p className="error__text">{text}</p>
+            </div>
+        </Fade>
     );
 }
 
