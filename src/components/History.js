@@ -1,19 +1,18 @@
 import React, { useEffect } from "react";
 import moment from "moment";
-import Fade from "react-reveal/Fade";
 import HistoryItem from "./HistoryItem";
 import Button from "./Button";
 
 const History = props => {
-    // useEffect(() => {
-    //     const body = document.querySelector("body").style;
-    //     if (props.active) {
-    //         body.overflow = "hidden";
-    //     }
-    //     else {
-    //         body.overflow = "initial";
-    //     }
-    // }, [props.active])
+    useEffect(() => {
+        const body = document.querySelector("body").style;
+        if (props.active) {
+            body.overflow = "hidden";
+        }
+        else {
+            body.overflow = null;
+        }
+    }, [props.active])
 
     const itemClickHandler = name => {
         props.closed();
@@ -57,7 +56,6 @@ const History = props => {
 
     return (
         <div className={!props.active ? "history" : "history active"}>
-            {/* <Fade cascade bottom duration={500}> */}
             <div className="history__wrapper">
                 <div className="history__top">
                     <h1 className="history__heading">Search History</h1>
@@ -73,7 +71,6 @@ const History = props => {
                         historyContent()}
                 </div>
             </div>
-            {/* </Fade> */}
         </div>
     )
 }
