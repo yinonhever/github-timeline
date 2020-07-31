@@ -10,11 +10,10 @@ import History from "./History";
 const Layout = () => {
     const [user, setUser] = useState(null);
     const [repos, setRepos] = useState(null);
-    const [years, setYears] = useState(null);
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(false);
     const [history, setHistory] = usePersistedState("history", []);
-    const [modalActive, setModalActive] = useState(false);
+    const [showHistory, setShowHistory] = useState(false);
 
     const submitHandler = input => {
         setUser(null);
@@ -31,17 +30,13 @@ const Layout = () => {
                             setLoading(false);
                             const matchingProfile = res.data.items.find(item =>
                                 item.login.toLowerCase() === input.toLowerCase());
-                            setUser({ name: input, avatar: matchingProfile.avatar_url });
+                            setUser({ name: matchingProfile.login, avatar: matchingProfile.avatar_url });
+                            updateHistory(matchingProfile.login);
+
                             const newRepos = response.data;
                             newRepos.sort((a, b) => new Date(b.created_at) - new Date(a.created_at));
                             setRepos(newRepos);
-                            createYearsData(newRepos);
-                            updateHistory(input);
-
-                            if (newRepos.length > 0) {
-                                setError(false);
-                            }
-                            else {
+                            if (newRepos.length === 0) {
                                 setError(true);
                             }
                         })
@@ -53,39 +48,20 @@ const Layout = () => {
         }
     }
 
-    const createYearsData = newRepos => {
-        const newYearsArray = [];
-
-        newRepos.forEach(repo => {
-            const year = new Date(repo.created_at).getFullYear();
-            const existingYearItem = newYearsArray.find(item => item.year === year);
-            if (existingYearItem) {
-                const index = newYearsArray.indexOf(existingYearItem);
-                newYearsArray[index].count++;
-            }
-            else {
-                newYearsArray.push({ year: year, count: 1 });
-            }
-        })
-
-        newYearsArray.sort((a, b) => a.year - b.year);
-        setYears(newYearsArray);
-    }
-
-    const updateHistory = input => {
+    const updateHistory = name => {
         const newHistory = history.filter(item =>
-            item.name.toLowerCase() !== input.toLowerCase() ||
+            item.name !== name ||
             moment(item.date).format("LL") !== moment().format("LL"));
-        newHistory.push({ name: input, date: new Date() });
+        newHistory.push({ name: name, date: new Date() });
         setHistory(newHistory);
     }
 
-    const modalHandler = () => {
-        setModalActive(!modalActive);
+    const showHistoryHandler = () => {
+        setShowHistory(!showHistory);
     }
 
     const itemDeleteHandler = name => {
-        setHistory(history => history.filter(item => item.name.toLowerCase() !== name.toLowerCase()));
+        setHistory(history => history.filter(item => item.name !== name));
     }
 
     const clearHandler = () => {
@@ -96,18 +72,17 @@ const Layout = () => {
         <Aux>
             <Header
                 onFormSubmit={submitHandler}
-                onShowHistory={modalHandler}
+                onShowHistory={showHistoryHandler}
             />
             <Main
                 user={user}
                 repos={repos}
-                years={years}
                 loading={loading}
                 error={error}
             />
             <History
-                active={modalActive}
-                closed={modalHandler}
+                active={showHistory}
+                closed={showHistoryHandler}
                 history={history}
                 itemClicked={submitHandler}
                 itemDeleted={itemDeleteHandler}

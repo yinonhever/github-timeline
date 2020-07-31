@@ -1,8 +1,20 @@
-import React from "react";
+import React, { useEffect } from "react";
 import moment from "moment";
+import Fade from "react-reveal/Fade";
 import HistoryItem from "./HistoryItem";
+import Button from "./Button";
 
 const History = props => {
+    // useEffect(() => {
+    //     const body = document.querySelector("body").style;
+    //     if (props.active) {
+    //         body.overflow = "hidden";
+    //     }
+    //     else {
+    //         body.overflow = "initial";
+    //     }
+    // }, [props.active])
+
     const itemClickHandler = name => {
         props.closed();
         props.itemClicked(name);
@@ -45,14 +57,23 @@ const History = props => {
 
     return (
         <div className={!props.active ? "history" : "history active"}>
-            <div className="history__modal">
+            {/* <Fade cascade bottom duration={500}> */}
+            <div className="history__wrapper">
                 <div className="history__top">
-
+                    <h1 className="history__heading">Search History</h1>
+                    <i className="history__close fas fa-times" onClick={props.closed} />
                 </div>
+                {props.history.length > 0 ?
+                    <div className="history__clear">
+                        <Button wide text="Clear history" clicked={props.cleared} />
+                    </div> : null}
                 <div className="history__content">
-                    {/* {historyContent()} */}
+                    {props.history.length === 0 ?
+                        <p className="history__empty">You don't have any searches yet.</p> :
+                        historyContent()}
                 </div>
             </div>
+            {/* </Fade> */}
         </div>
     )
 }

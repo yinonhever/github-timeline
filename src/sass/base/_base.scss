@@ -14,3 +14,8 @@ body {
   box-sizing: inherit;
   background-color: $color-dark-blue-1;
 }
+
+::selection {
+  background-color: $color-azure;
+  color: #fff;
+}

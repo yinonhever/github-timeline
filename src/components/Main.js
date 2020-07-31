@@ -21,9 +21,21 @@ const Main = props => {
 
     return (
         <main className="main">
-            {!props.loading && props.user ?
-                <User name={props.user.name} avatar={props.user.avatar} /> : null}
+            {props.user ? <User name={props.user.name} avatar={props.user.avatar} /> : null}
             {mainContent()}
+            {/* {props.user &&
+                <div style={{
+                    position: "fixed",
+                    top: 0,
+                    left: 0,
+                    width: "100vw",
+                    height: "100vw",
+                    minHeight: "70rem",
+                    backgroundColor: "#141c45",
+                    opacity: 0.95,
+                    zIndex: 9999
+                }} />
+            } */}
         </main>
     )
 }

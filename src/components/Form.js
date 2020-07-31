@@ -20,11 +20,10 @@ const Form = props => {
     const submitHandler = event => {
         event.preventDefault();
         props.submit(username.trim());
-        setUsername("");
-        
         if (username.trim() === "") {
             setError(true);
         }
+        setUsername("");
     }
 
     return (
