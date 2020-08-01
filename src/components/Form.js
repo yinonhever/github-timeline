@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Button from "./Button";
 
 const Form = props => {
@@ -25,6 +25,13 @@ const Form = props => {
         }
         setUsername("");
     }
+
+    useEffect(() => {
+        const historyItems = document.getElementsByClassName("history__item-text");
+        for (let i = 0; i < historyItems.length; i++) {
+            historyItems[i].addEventListener("click", () => setError(false));
+        }
+    }, [])
 
     return (
         <form className={!error ? "form" : "form form--error"} onSubmit={submitHandler}>

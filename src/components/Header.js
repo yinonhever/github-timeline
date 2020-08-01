@@ -10,10 +10,11 @@ const Header = props => (
                 <img className="header__logo" src={logo} alt="logo" />
             </a>
             <Button text="Search history" clicked={props.onShowHistory} />
+            <i className="header__history-icon fas fa-history" onClick={props.onShowHistory} />
         </div>
         <p className="header__text">
-            Enter a Github username to generate a timeline and a yearly summary of the user's repositories.
-            Only public repositories will be displayed.
+            Enter a Github username to generate a timeline and a yearly summary of the user's 
+            repositories. Only public repositories will be displayed.
         </p>
         <Form submit={props.onFormSubmit} />
     </header>

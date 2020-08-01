@@ -30,13 +30,22 @@ const Layout = () => {
                             setLoading(false);
                             const matchingProfile = res.data.items.find(item =>
                                 item.login.toLowerCase() === input.toLowerCase());
-                            setUser({ name: matchingProfile.login, avatar: matchingProfile.avatar_url });
-                            updateHistory(matchingProfile.login);
 
-                            const newRepos = response.data;
-                            newRepos.sort((a, b) => new Date(b.created_at) - new Date(a.created_at));
-                            setRepos(newRepos);
-                            if (newRepos.length === 0) {
+                            if (matchingProfile) {
+                                setUser({
+                                    name: matchingProfile.login,
+                                    avatar: matchingProfile.avatar_url
+                                });
+                                updateHistory(matchingProfile.login);
+                                const newRepos = response.data;
+                                newRepos.sort((a, b) => new Date(b.created_at) - new Date(a.created_at));
+                                setRepos(newRepos);
+
+                                if (newRepos.length === 0) {
+                                    setError(true);
+                                }
+                            }
+                            else {
                                 setError(true);
                             }
                         })

@@ -2,6 +2,10 @@
   text-align: center;
   padding: 0 $padding-side-mobile;
   margin-bottom: 6.5rem;
+
+  @include respond(mobile) {
+    margin-bottom: 5rem;
+  }
 }
 
 .user {
@@ -9,6 +13,7 @@
   flex-direction: column;
   align-items: center;
   position: relative;
+  max-width: 100%;
 
   &__avatar {
     position: absolute;
@@ -18,10 +23,25 @@
     width: 8rem;
     border-radius: 50%;
     border: 2px solid $color-azure;
+
+    @include respond(tablet-land) {
+      position: initial;;
+      right: initial;
+      top: initial;
+      transform: none;
+      width: 6.5rem;
+      margin-bottom: 1rem;
+    }
   }
 
   &__name {
     font-size: 4.5rem;
+    max-width: calc(100vw - 4rem);
+    word-wrap: break-word;
+
+    @include respond(mobile) {
+      font-size: 3rem;
+    }
   }
 
   &__line {

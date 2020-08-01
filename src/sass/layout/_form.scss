@@ -1,5 +1,5 @@
 .form {
-  width: 90%;
+  width: 85%;
   max-width: 60rem;
   height: 15rem;
   position: absolute;
@@ -9,6 +9,10 @@
   background-color: $color-blue;
   box-shadow: rgba(0, 0, 0, 0.06) 0px 1px 1px 1px;
   border-radius: 1rem;
+
+  @include respond(mobile-land) {
+    height: 20rem
+  }
 
   &::after {
     content: "Please enter a username";
@@ -39,12 +43,25 @@
     right: 4rem;
     transform: translateY(-50%);
     display: flex;
+
+    @include respond(mobile-land) {
+      flex-direction: column;
+      align-items: center;
+    }
   }
 
   &__input-wrapper {
     flex: 1;
     margin-right: 4rem;
     position: relative;
+
+    @include respond(mobile-land) {
+      flex: initial;
+      margin-bottom: 2.5rem;
+      margin-right: 0;
+      width: 100%;
+      max-width: 40rem;
+    }
 
     &::before,
     &::after {
@@ -87,9 +104,21 @@
       color: currentColor;
       opacity: 0.3;
     }
+
+    @include respond(mobile) {
+      font-size: 1.3rem;
+    }
   }
 
   &--error &__input {
     border-color: $color-error;
+  }
+
+  .button {
+    @include respond(mobile-land) {
+      width: 100%;
+      max-width: 30rem;
+      font-size: 1.2rem;
+    } 
   }
 }

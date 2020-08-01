@@ -5,15 +5,45 @@
   padding: 5rem $padding-side-desktop;
   position: relative;
 
+  @include respond(tablet-land) {
+    padding: 5rem $padding-side-mobile;
+  }
+
+  @include respond(mobile) {
+    height: auto;
+    padding-top: 3rem;
+    padding-bottom: 15rem;
+  }
+
   &__top {
     display: flex;
     align-items: center;
     justify-content: space-between;
+
+    .button {
+      @include respond(mobile) {
+        display: none;
+      }
+    }
   }
 
   &__logo {
     width: 18rem;
     display: block;
+
+    @include respond(mobile) {
+      width: 35vw;
+      max-width: 14rem;
+    }
+  }
+
+  &__history-icon {
+    display: none;
+
+    @include respond(mobile) {
+      display: block;
+      font-size: 2rem;
+    }
   }
 
   &__text {
@@ -22,5 +52,9 @@
     width: 100%;
     max-width: 50rem;
     line-height: 1.6;
+
+    @include respond(mobile) {
+      font-size: 1.4rem;
+    }
   }
 }

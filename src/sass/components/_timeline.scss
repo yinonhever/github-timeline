@@ -5,7 +5,12 @@
   flex-direction: column;
   position: relative;
 
+  @include respond(tablet) {
+    max-width: 50rem;
+  }
+
   &::after {
+    // the timeline itself
     content: "";
     position: absolute;
     left: 50%;
@@ -21,15 +26,31 @@
     padding: 2rem 4rem;
     position: relative;
 
+    @include respond(tablet) {
+      width: 100%;
+      padding: 3rem 0 0;
+
+      &:not(:last-child) {
+        margin-bottom: 7rem;
+      }
+    }
+
     &::before {
+      // the gradients at the top and bottom of the timeline
       content: "";
       position: absolute;
       width: 0.6rem;
       height: 4rem;
       z-index: 2;
+
+      @include respond(tablet) {
+        left: 50% !important;
+        right: initial !important;
+      }
     }
 
     &::after {
+      // the circles on the timeline
       content: "";
       position: absolute;
       bottom: 5rem;
@@ -39,6 +60,13 @@
       border: 4px solid $color-azure;
       border-radius: 50%;
       z-index: 1;
+
+      @include respond(tablet) {
+        bottom: 100%;
+        left: 50% !important;
+        right: initial !important;
+        transform: translateX(-50%) !important;
+      }
     }
 
     &.left {
@@ -91,12 +119,24 @@
     box-shadow: rgba(50, 50, 50, 0.14) -2px -4px 6px 1px;
     word-wrap: break-word;
     position: relative;
+    z-index: 10;
+
+    @include respond(tablet) {
+      text-align: center;
+    }
 
     &::after {
+      // the arrows on the cards
       content: "";
       position: absolute;
       bottom: 3rem;
       border: medium solid;
+
+      @include respond(tablet) {
+        bottom: calc(100% - 0.6rem);
+        left: 50% !important;
+        right: initial !important;
+      }
     }
   }
 
@@ -104,46 +144,79 @@
     right: -1.2rem;
     border-width: 1.2rem 0 1.2rem 1.2rem;
     border-color: transparent transparent transparent $color-dark-blue-2;
+
+    @include respond(tablet) {
+      transform: translateX(-50%) rotate(-90deg);
+    }
   }
 
   &__side.right &__card::after {
     left: -1.2rem;
     border-width: 1.2rem 1.2rem 1.2rem 0;
     border-color: transparent $color-dark-blue-2 transparent transparent;
+
+    @include respond(tablet) {
+      transform: translateX(-50%) rotate(90deg);
+    }
   }
 
   &__title {
     font-size: 3rem;
     margin-bottom: 1rem;
+
+    @include respond(mobile) {
+      font-size: 2.5rem;
+    }
   }
 
   &__date {
     display: flex;
     align-items: center;
+
+    @include respond(tablet) {
+      justify-content: center;
+    }
   }
 
   &__date-icon {
     margin-right: 0.8rem;
     font-size: 1.6rem;
+
+    @include respond(mobile) {
+      font-size: 1.5rem;
+    }
   }
 
   &__date-text {
     font-weight: 600;
     font-size: 1.3rem;
     transform: translateY(1.25px);
+
+    @include respond(mobile) {
+      font-size: 1.2rem;
+    }
   }
 
   &__description {
     margin: 2.5rem 0;
     font-size: 1.5rem;
     line-height: 1.6;
+
+    @include respond(mobile) {
+      font-size: 1.4rem;
+    }
   }
 
   .button {
     font-weight: 600;
-    width: 20rem;
+    width: 100%;
+    max-width: 20rem;
     position: relative;
     transition: all 0.3s;
+
+    @include respond(mobile) {
+      font-size: 1rem;
+    }
 
     &__icon {
       position: absolute;
