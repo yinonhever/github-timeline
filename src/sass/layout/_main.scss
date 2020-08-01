@@ -5,4 +5,8 @@
   @include respond(tablet-land) {
     padding: 15rem $padding-side-mobile 10rem;
   }
+
+  @include respond(mobile) {
+    padding-bottom: 7rem;
+  }
 }

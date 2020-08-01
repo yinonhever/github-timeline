@@ -46,6 +46,7 @@
       @include respond(tablet) {
         left: 50% !important;
         right: initial !important;
+        transform: translateX(-50%) !important;
       }
     }
 
@@ -59,7 +60,7 @@
       background-color: $color-blue;
       border: 4px solid $color-azure;
       border-radius: 50%;
-      z-index: 1;
+      z-index: 5;
 
       @include respond(tablet) {
         bottom: 100%;
@@ -123,6 +124,10 @@
 
     @include respond(tablet) {
       text-align: center;
+    }
+
+    @include respond(mobile-land) {
+        padding: 3rem 2.5rem;
     }
 
     &::after {

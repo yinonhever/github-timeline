@@ -10,10 +10,19 @@
   &__icon {
     font-size: 3.5rem;
     margin-bottom: 2.5rem;
+
+    @include respond(mobile) {
+      font-size: 2.3rem;
+    }
   }
 
   &__text {
     font-size: 1.7rem;
     font-weight: 500;
+
+    @include respond(mobile) {
+      font-size: 1.4rem;
+      line-height: 1.5;
+    }
   }
 }
