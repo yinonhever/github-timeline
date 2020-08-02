@@ -47,14 +47,26 @@
   }
 
   &__text {
-    margin: 6rem auto 0;
+    margin: 7rem auto 0;
     text-align: center;
     width: 100%;
     max-width: 50rem;
     line-height: 1.6;
+    position: relative;
 
     @include respond(mobile) {
       font-size: 1.4rem;
+    }
+
+    &::before {
+      content: "";
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
+      bottom: calc(100% + 2rem);
+      width: 8rem;
+      height: 0.5rem;
+      background-color: $color-azure;
     }
   }
 }
