@@ -1,5 +1,5 @@
 .form {
-  width: 85%;
+  width: calc(100% - #{$padding-side-mobile} *2);
   max-width: 60rem;
   height: 15rem;
   position: absolute;
@@ -11,7 +11,7 @@
   border-radius: 1rem;
 
   @include respond(mobile-land) {
-    height: 20rem
+    height: 20rem;
   }
 
   &::after {
@@ -28,6 +28,10 @@
     opacity: 0;
     transform: translateY(-6rem);
     transition: all 0.5s;
+
+    @include respond(mobile) {
+      font-size: 1.3rem;
+    }
   }
 
   &--error::after {

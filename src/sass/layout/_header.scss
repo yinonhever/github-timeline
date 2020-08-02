@@ -9,7 +9,7 @@
     padding: 5rem $padding-side-mobile;
   }
 
-  @include respond(mobile) {
+  @include respond(tablet) {
     height: auto;
     padding-top: 3rem;
     padding-bottom: 15rem;
@@ -53,6 +53,10 @@
     max-width: 50rem;
     line-height: 1.6;
     position: relative;
+
+    @include respond(tablet) {
+      margin-top: 8rem;
+    }
 
     @include respond(mobile) {
       font-size: 1.4rem;
