@@ -1,9 +1,12 @@
 .header {
   width: 100%;
   height: 39rem;
-  background: $color-dark-blue-2;
   padding: 5rem $padding-side-desktop;
   position: relative;
+  background-color: $color-dark-blue-2;
+  background-image: url("../../images/Liquid-Cheese.svg");
+  background-attachment: fixed;
+  background-size: cover;
 
   @include respond(tablet-land) {
     padding: 5rem $padding-side-mobile;
