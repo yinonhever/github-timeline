@@ -6,13 +6,7 @@ import Button from "./Button";
 
 const History = props => {
     useEffect(() => {
-        const body = document.querySelector("body").style;
-        if (props.active) {
-            body.overflow = "hidden";
-        }
-        else {
-            body.overflow = null;
-        }
+        document.querySelector("body").style.overflow = props.active ? "hidden" : null;
     }, [props.active])
 
     const itemClickHandler = name => {
@@ -43,7 +37,7 @@ const History = props => {
     }
 
     return (
-        <div className={!props.active ? "history" : "history active"}>
+        <div className={props.active ? "history active" : "history"}>
             <div className="history__wrapper">
                 <div className="history__top">
                     <h1 className="history__heading">Search History</h1>
