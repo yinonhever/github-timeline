@@ -31,7 +31,7 @@ const Form = props => {
         for (let i = 0; i < historyItems.length; i++) {
             historyItems[i].addEventListener("click", () => setError(false));
         }
-    }, [])
+    }, [error])
 
     return (
         <form className={!error ? "form" : "form form--error"} onSubmit={submitHandler}>
