@@ -97,7 +97,7 @@
         top: -4rem;
         background-image: linear-gradient(
           to bottom,
-          $color-azure,
+         $color-dark-blue-2,
           $color-blue
         ) !important;
       }
@@ -108,7 +108,7 @@
 
       &::before {
         bottom: -4rem;
-        background-image: linear-gradient(to top, $color-azure, $color-blue);
+        background-image: linear-gradient(to top, $color-dark-blue-2, $color-blue);
       }
     }
   }
@@ -118,6 +118,7 @@
     background-color: $color-dark-blue-2;
     padding: 3rem 3.5rem;
     box-shadow: rgba(50, 50, 50, 0.14) -2px -4px 6px 1px;
+    filter: brightness(115%);
     word-wrap: break-word;
     position: relative;
     z-index: 10;
