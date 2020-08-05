@@ -58,7 +58,8 @@ const History = props => {
                                             key={historyItem.name}
                                             item={historyItem.name}
                                             clicked={itemClickHandler}
-                                            onDelete={props.itemDeleted}
+                                            onDelete={() =>
+                                                props.itemDeleted(historyItem.name, historyItem.date)}
                                         />
                                     )}
                                 </div>

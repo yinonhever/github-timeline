@@ -69,8 +69,10 @@ const Layout = () => {
         setShowHistory(!showHistory);
     }
 
-    const itemDeleteHandler = name => {
-        setHistory(history => history.filter(item => item.name !== name));
+    const itemDeleteHandler = (name, date) => {
+        setHistory(history => history.filter(item =>
+            item.name !== name ||
+            moment(item.date).format("LL") !== moment(date).format("LL")));
     }
 
     const clearHandler = () => {
