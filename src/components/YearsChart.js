@@ -1,35 +1,49 @@
 import React from "react";
-import Paper from '@material-ui/core/Paper';
-import { Chart, BarSeries, ArgumentAxis, ValueAxis } from '@devexpress/dx-react-chart-material-ui';
-import { Animation } from '@devexpress/dx-react-chart';
+import { createMuiTheme } from "@material-ui/core/styles";
+import { ThemeProvider } from "@material-ui/styles";
+import Paper from "@material-ui/core/Paper";
+import { Chart, BarSeries, ArgumentAxis, ValueAxis } from "@devexpress/dx-react-chart-material-ui";
+import { Animation } from "@devexpress/dx-react-chart";
+
+const darkTheme = createMuiTheme({
+    palette: {
+        type: "dark"
+    }
+})
 
 const YearsChart = props => {
-    const yearsData = () => {
-        const newYearsArray = [];
+    const data = () => {
+        const years = [];
         props.repos.forEach(repo => {
             const year = new Date(repo.created_at).getFullYear().toString();
-            const existingYearItem = newYearsArray.find(item => item.year === year);
+            const existingYearItem = years.find(item => item.year === year);
             if (existingYearItem) {
-                const index = newYearsArray.indexOf(existingYearItem);
-                newYearsArray[index].count++;
+                const index = years.indexOf(existingYearItem);
+                years[index].count++;
             }
             else {
-                newYearsArray.push({ year: year, count: 1 });
+                years.push({ year: year, count: 1 });
             }
         })
-        newYearsArray.sort((a, b) => a.year - b.year);
-        return newYearsArray;
+        years.sort((a, b) => a.year - b.year);
+        return years;
     }
 
     return (
-        <Paper>
-            <Chart data={yearsData()}>
-                <ArgumentAxis />
-                <ValueAxis/>
-                <BarSeries valueField="count" argumentField="year" />
-                <Animation />
-            </Chart>
-        </Paper>
+        <ThemeProvider theme={darkTheme}>
+            <Paper elevation={20} style={{
+                maxWidth: "120rem",
+                margin: "5rem auto 0",
+                backgroundColor: "#141c45"
+            }}>
+                <Chart data={data()}>
+                    <ArgumentAxis />
+                    <ValueAxis />
+                    <BarSeries valueField="count" argumentField="year" />
+                    <Animation duration={2000} />
+                </Chart>
+            </Paper>
+        </ThemeProvider>
     )
 }
 

@@ -19,6 +19,7 @@
     transform: translateX(-50%);
     width: 0.6rem;
     background-color: $color-blue;
+    z-index: -1;
   }
 
   &__side {

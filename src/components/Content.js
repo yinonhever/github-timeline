@@ -6,7 +6,7 @@ const Content = props => {
     return (
         <div>
             <Timeline repos={props.repos} />
-            {/* <YearsChart repos={props.repos} /> */}
+            <YearsChart repos={props.repos} />
         </div>
     )
 }

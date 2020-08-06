@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import Paper from "@material-ui/core/Paper";
 import Button from "./Button";
 
 const Form = props => {
@@ -34,21 +35,26 @@ const Form = props => {
     }, [error])
 
     return (
-        <form className={!error ? "form" : "form form--error"} onSubmit={submitHandler}>
-            <div className={"form__content"}>
-                <div className={focused ? "form__input-wrapper focused" : "form__input-wrapper"}>
-                    <input
-                        className="form__input"
-                        placeholder="Enter a username here..."
-                        value={username}
-                        onChange={changeHandler}
-                        onFocus={focusHandler}
-                        onBlur={focusHandler}
-                    />
+        <Paper elevation={24} style={{
+            color: "inherit",
+            backgroundColor: "transparent"
+        }}>
+            <form className={!error ? "form" : "form form--error"} onSubmit={submitHandler}>
+                <div className={"form__content"}>
+                    <div className={focused ? "form__input-wrapper focused" : "form__input-wrapper"}>
+                        <input
+                            className="form__input"
+                            placeholder="Enter a username here..."
+                            value={username}
+                            onChange={changeHandler}
+                            onFocus={focusHandler}
+                            onBlur={focusHandler}
+                        />
+                    </div>
+                    <Button wide big wobble text="Generate" icon="fas fa-location-arrow" />
                 </div>
-                <Button wide big wobble text="Generate" icon="fas fa-location-arrow" />
-            </div>
-        </form>
+            </form>
+        </Paper>
     )
 }
 
