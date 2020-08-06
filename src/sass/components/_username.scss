@@ -36,7 +36,7 @@
 
   &__name {
     font-size: 4.5rem;
-    max-width: calc(100vw - 4rem);
+    max-width: calc(100vw - 2rem);
     word-wrap: break-word;
 
     @include respond(mobile) {

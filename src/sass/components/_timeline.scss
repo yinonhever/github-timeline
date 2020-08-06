@@ -98,7 +98,7 @@
         top: -4rem;
         background-image: linear-gradient(
           to bottom,
-         $color-dark-blue-2,
+          $color-dark-blue-2,
           $color-blue
         ) !important;
       }
@@ -109,7 +109,11 @@
 
       &::before {
         bottom: -4rem;
-        background-image: linear-gradient(to top, $color-dark-blue-2, $color-blue);
+        background-image: linear-gradient(
+          to top,
+          $color-dark-blue-2,
+          $color-blue
+        );
       }
     }
   }
@@ -126,8 +130,8 @@
       text-align: center;
     }
 
-    @include respond(mobile-land) {
-        padding: 3rem 2.5rem;
+    @include respond(mobile) {
+      padding: 3rem 2.5rem;
     }
 
     &::after {

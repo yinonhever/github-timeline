@@ -5,14 +5,14 @@ import Paper from "@material-ui/core/Paper";
 import { Chart, BarSeries, ArgumentAxis, ValueAxis } from "@devexpress/dx-react-chart-material-ui";
 import { Animation } from "@devexpress/dx-react-chart";
 
-const darkTheme = createMuiTheme({
-    palette: {
-        type: "dark"
-    }
-})
-
 const YearsChart = props => {
-    const data = () => {
+    const darkTheme = createMuiTheme({
+        palette: {
+            type: "dark"
+        }
+    })
+
+    const yearsData = () => {
         const years = [];
         props.repos.forEach(repo => {
             const year = new Date(repo.created_at).getFullYear().toString();
@@ -33,10 +33,10 @@ const YearsChart = props => {
         <ThemeProvider theme={darkTheme}>
             <Paper elevation={20} style={{
                 maxWidth: "120rem",
-                margin: "7rem auto 0",
+                margin: "auto",
                 backgroundColor: "#141c45"
             }}>
-                <Chart data={data()}>
+                <Chart data={yearsData()}>
                     <ArgumentAxis />
                     <ValueAxis />
                     <BarSeries valueField="count" argumentField="year" />
