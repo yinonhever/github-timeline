@@ -33,7 +33,7 @@ const YearsChart = props => {
         <ThemeProvider theme={darkTheme}>
             <Paper elevation={20} style={{
                 maxWidth: "120rem",
-                margin: "5rem auto 0",
+                margin: "7rem auto 0",
                 backgroundColor: "#141c45"
             }}>
                 <Chart data={data()}>
