@@ -3,7 +3,6 @@ import Aux from "../hoc/Auxilliary";
 import Timeline from "./Timeline";
 import YearsChart from "./YearsChart";
 import theme from "../utility/theme";
-import PropTypes from "prop-types";
 import { ThemeProvider } from "@material-ui/styles";
 import AppBar from "@material-ui/core/AppBar";
 import Tabs from "@material-ui/core/Tabs";
@@ -30,12 +29,6 @@ const TabPanel = props => {
         </div>
     );
 }
-
-TabPanel.propTypes = {
-    children: PropTypes.node,
-    index: PropTypes.any.isRequired,
-    value: PropTypes.any.isRequired,
-};
 
 const a11yProps = index => ({
     id: `simple-tab-${index}`,
