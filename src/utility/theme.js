@@ -1,6 +1,7 @@
 import { createMuiTheme } from "@material-ui/core/styles";
 
-// This Material UI theme is used in the tabs and chart elements
+// This Material UI theme is used for the tabs and chart elements.
+// The rest of the app is styled with SCSS.
 
 const theme = createMuiTheme({
     palette: {
