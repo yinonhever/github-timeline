@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import usePersistedState from "../usePersistedState";
 import axios from "axios";
 import moment from "moment";
@@ -14,14 +14,6 @@ const Layout = () => {
     const [error, setError] = useState(false);
     const [history, setHistory] = usePersistedState("history", []);
     const [showHistory, setShowHistory] = useState(false);
-
-    useEffect(() => {
-        console.log(document.getElementsByClassName("timeline__card").length);
-
-        document.getElementsByClassName("header")[0].addEventListener("click", () => {
-            console.log(document.getElementsByClassName("timeline__card").length);
-        })
-    }, [repos])
 
     const submitHandler = input => {
         setUser(null);
@@ -82,7 +74,7 @@ const Layout = () => {
     const clearHandler = () => {
         setHistory([]);
     }
-    
+
     const showHistoryHandler = () => {
         setShowHistory(!showHistory);
     }
