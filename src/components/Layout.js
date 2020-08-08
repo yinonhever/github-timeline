@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import usePersistedState from "../usePersistedState";
+import usePersistedState from "../utility/usePersistedState";
 import axios from "axios";
 import moment from "moment";
 import Aux from "../hoc/Auxilliary";

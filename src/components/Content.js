@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import Aux from "../hoc/Auxilliary";
 import Timeline from "./Timeline";
 import YearsChart from "./YearsChart";
-import theme from "./theme";
+import theme from "../utility/theme";
 import PropTypes from "prop-types";
 import { ThemeProvider } from "@material-ui/styles";
 import AppBar from "@material-ui/core/AppBar";

@@ -1,5 +1,7 @@
 import { createMuiTheme } from "@material-ui/core/styles";
 
+// This Material UI theme is used in the tabs and chart elements
+
 const theme = createMuiTheme({
     palette: {
         type: "dark",

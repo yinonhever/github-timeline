@@ -1,6 +1,6 @@
 import React from "react";
 import Fade from "react-reveal/Fade";
-import theme from "./theme";
+import theme from "../utility/theme";
 import { ThemeProvider } from "@material-ui/styles";
 import Paper from "@material-ui/core/Paper";
 import { Chart, BarSeries, ArgumentAxis, ValueAxis } from "@devexpress/dx-react-chart-material-ui";
