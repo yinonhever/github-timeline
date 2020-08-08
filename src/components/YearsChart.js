@@ -1,17 +1,11 @@
 import React from "react";
-import { createMuiTheme } from "@material-ui/core/styles";
+import theme from "./theme";
 import { ThemeProvider } from "@material-ui/styles";
 import Paper from "@material-ui/core/Paper";
 import { Chart, BarSeries, ArgumentAxis, ValueAxis } from "@devexpress/dx-react-chart-material-ui";
 import { Animation } from "@devexpress/dx-react-chart";
 
 const YearsChart = props => {
-    const darkTheme = createMuiTheme({
-        palette: {
-            type: "dark"
-        }
-    })
-
     const yearsData = () => {
         const years = [];
         props.repos.forEach(repo => {
@@ -30,17 +24,13 @@ const YearsChart = props => {
     }
 
     return (
-        <ThemeProvider theme={darkTheme}>
-            <Paper elevation={20} style={{
-                maxWidth: "120rem",
-                margin: "auto",
-                backgroundColor: "#141c45"
-            }}>
+        <ThemeProvider theme={theme}>
+            <Paper elevation={20} style={{ maxWidth: "120rem", margin: "auto" }}>
                 <Chart data={yearsData()}>
                     <ArgumentAxis />
                     <ValueAxis />
                     <BarSeries valueField="count" argumentField="year" />
-                    <Animation duration={2000} />
+                    <Animation duration={1500} />
                 </Chart>
             </Paper>
         </ThemeProvider>
