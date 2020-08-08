@@ -10,7 +10,7 @@ const Timeline = props => (
         {props.repos.map((repo, index) => (
             <div className={index % 2 === 0 ? "timeline__side right" : "timeline__side left"}
                 key={repo.id}>
-                <LazyLoad height={200}>
+                <LazyLoad>
                     <Fade duration={600} right={index % 2 === 0} left={index % 2 !== 0}>
                         <Paper elevation={15} style={{
                             color: "inherit",
