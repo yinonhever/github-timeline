@@ -1,4 +1,5 @@
 import React from "react";
+import Fade from "react-reveal/Fade";
 import theme from "./theme";
 import { ThemeProvider } from "@material-ui/styles";
 import Paper from "@material-ui/core/Paper";
@@ -25,14 +26,16 @@ const YearsChart = props => {
 
     return (
         <ThemeProvider theme={theme}>
-            <Paper elevation={20} style={{ maxWidth: "120rem", margin: "auto" }}>
-                <Chart data={yearsData()}>
-                    <ArgumentAxis />
-                    <ValueAxis />
-                    <BarSeries valueField="count" argumentField="year" />
-                    <Animation duration={1500} />
-                </Chart>
-            </Paper>
+            <Fade left duration={600}>
+                <Paper elevation={20} style={{ maxWidth: "120rem", margin: "auto" }}>
+                    <Chart data={yearsData()}>
+                        <ArgumentAxis />
+                        <ValueAxis />
+                        <BarSeries valueField="count" argumentField="year" />
+                        <Animation duration={1750} />
+                    </Chart>
+                </Paper>
+            </Fade>
         </ThemeProvider>
     )
 }

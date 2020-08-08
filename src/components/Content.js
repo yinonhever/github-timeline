@@ -52,7 +52,7 @@ const Content = props => {
     return (
         <Aux>
             <ThemeProvider theme={theme}>
-                <AppBar position="static" style={{ maxWidth: 600, margin: "0 auto 8rem" }}>
+                <AppBar position="static" className="tabs">
                     <Tabs variant="fullWidth" value={value} onChange={changeHandler}>
                         <Tab label="Timeline" icon={<TimelineIcon />} className="tab" {...a11yProps(0)} />
                         <Tab label="Yearly Chart" icon={<EqualizerIcon />} className="tab" {...a11yProps(1)} />

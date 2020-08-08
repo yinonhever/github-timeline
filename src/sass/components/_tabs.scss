@@ -1,3 +1,12 @@
+.tabs {
+  max-width: 60rem;
+  margin: 0 auto 8rem;
+
+  @include respond(mobile) {
+    margin-bottom: 6rem;
+  }
+}
+
 .tab {
   transition: background-color 0.5s;
 
