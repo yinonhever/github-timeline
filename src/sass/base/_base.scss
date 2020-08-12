@@ -3,7 +3,7 @@
 *::after {
   margin: 0;
   padding: 0;
-  box-sizing: border-box;
+  box-sizing: inherit;
 }
 
 html {
@@ -11,7 +11,7 @@ html {
 }
 
 body {
-  box-sizing: inherit;
+  box-sizing: border-box;
   background-color: $color-dark-blue-1;
   background-image: url("../../images/Rose-Petals.svg");
   background-attachment: fixed;
