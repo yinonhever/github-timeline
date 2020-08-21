@@ -1,5 +1,5 @@
 .form {
-  width: calc(100% - #{$padding-side-mobile} *2);
+  width: calc(100% - #{$padding-side-mobile} * 2);
   max-width: 60rem;
   height: 15rem;
   position: absolute;
@@ -7,7 +7,6 @@
   left: 50%;
   transform: translate(-50%, -50%);
   background-color: $color-blue;
-  // box-shadow: rgba(0, 0, 0, 0.06) 0px 1px 1px 1px;
   border-radius: 1rem;
 
   @include respond(mobile-land) {
