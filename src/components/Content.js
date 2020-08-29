@@ -9,7 +9,6 @@ import Tabs from "@material-ui/core/Tabs";
 import Tab from "@material-ui/core/Tab";
 import EqualizerIcon from '@material-ui/icons/Equalizer';
 import TimelineIcon from '@material-ui/icons/Timeline';
-import Box from '@material-ui/core/Box';
 
 const TabPanel = props => {
     const { children, value, index, ...other } = props;
@@ -21,11 +20,7 @@ const TabPanel = props => {
             aria-labelledby={`simple-tab-${index}`}
             {...other}
         >
-            {value === index && (
-                <Box p={3} style={{ padding: 0 }}>
-                    {children}
-                </Box>
-            )}
+            {value === index && children}
         </div>
     );
 }

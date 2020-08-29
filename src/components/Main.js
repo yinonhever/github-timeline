@@ -5,23 +5,17 @@ import Spinner from "./Spinner";
 import Error from "./Error";
 
 const Main = props => {
+    const { user, repos, loading, error } = props;
+
     const mainContent = () => {
-        if (props.loading) {
-            return <Spinner />
-        }
-        else {
-            if (props.error) {
-                return <Error invalid={!props.user} />
-            }
-            else if (props.repos) {
-                return <Content repos={props.repos} />
-            }
-        }
+        if (loading) return <Spinner />;
+        else if (error) return <Error invalid={!user} />;
+        else if (repos) return <Content repos={repos} />;
     }
 
     return (
         <main className="main">
-            {props.user ? <User name={props.user.name} avatar={props.user.avatar} /> : null}
+            {user && <User name={user.name} avatar={user.avatar} />}
             {mainContent()}
         </main>
     )

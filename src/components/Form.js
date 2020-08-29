@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import Paper from "@material-ui/core/Paper";
 import Button from "./Button";
 
@@ -6,12 +6,12 @@ const Form = props => {
     const [username, setUsername] = useState("");
     const [focused, setFocused] = useState(false);
     const [error, setError] = useState(false);
+    const shouldValidate = useRef(false);
 
     const changeHandler = event => {
-        setUsername(event.target.value);
-        if (event.target.value.trim() !== "") {
-            setError(false);
-        }
+        const { value } = event.target;
+        setUsername(value);
+        setError(value.trim() === "" && shouldValidate.current);
     }
 
     const focusHandler = () => {
@@ -21,9 +21,8 @@ const Form = props => {
     const submitHandler = event => {
         event.preventDefault();
         props.submit(username.trim());
-        if (username.trim() === "") {
-            setError(true);
-        }
+        shouldValidate.current = username.trim() === "";
+        setError(username.trim() === "");
         setUsername("");
     }
 
