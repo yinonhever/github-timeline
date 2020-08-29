@@ -71,19 +71,11 @@ const Layout = () => {
             moment(item.date).format("LL") !== moment(date).format("LL")));
     }
 
-    const clearHandler = () => {
-        setHistory([]);
-    }
-
-    const showHistoryHandler = () => {
-        setShowHistory(!showHistory);
-    }
-
     return (
         <Aux>
             <Header
                 onFormSubmit={submitHandler}
-                onShowHistory={showHistoryHandler}
+                onShowHistory={() => setShowHistory(true)}
             />
             <Main
                 user={user}
@@ -93,11 +85,11 @@ const Layout = () => {
             />
             <History
                 active={showHistory}
-                closed={showHistoryHandler}
+                closed={() => setShowHistory(false)}
                 history={history}
                 itemClicked={submitHandler}
                 itemDeleted={itemDeleteHandler}
-                cleared={clearHandler}
+                cleared={() => setHistory([])}
             />
         </Aux>
     )
