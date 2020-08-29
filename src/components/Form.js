@@ -14,10 +14,6 @@ const Form = props => {
         setError(value.trim() === "" && shouldValidate.current);
     }
 
-    const focusHandler = () => {
-        setFocused(!focused);
-    }
-
     const submitHandler = event => {
         event.preventDefault();
         props.submit(username.trim());
@@ -46,8 +42,8 @@ const Form = props => {
                             placeholder="Enter a username here..."
                             value={username}
                             onChange={changeHandler}
-                            onFocus={focusHandler}
-                            onBlur={focusHandler}
+                            onFocus={() => setFocused(true)}
+                            onBlur={() => setFocused(false)}
                         />
                     </div>
                     <Button wide big wobble text="Generate" icon="fas fa-location-arrow" />
