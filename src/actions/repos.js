@@ -18,8 +18,11 @@ export const searchRepos = input => async (dispatch, getState) => {
         dispatch({ type: REPOS_SEARCH_REQUEST });
 
         try {
-            const reposRes = await axios.get(`https://api.github.com/users/${input}/repos?page=1&per_page=100`);
-            const profileRes = await axios.get(`https://api.github.com/search/users?q=${input}`);
+            const reposReq = axios.get(`https://api.github.com/users/${input}/repos?page=1&per_page=100`);
+            const profileReq = axios.get(`https://api.github.com/search/users?q=${input}`);
+
+            const responses = await axios.all([reposReq, profileReq]);
+            const [reposRes, profileRes] = responses;
 
             const matchingProfile = profileRes.data.items.find(item =>
                 item.login.toLowerCase() === input.toLowerCase());
