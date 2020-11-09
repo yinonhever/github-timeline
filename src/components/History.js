@@ -1,17 +1,33 @@
 import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import moment from "moment";
 import Aux from "../hoc/Auxilliary";
 import HistoryItem from "./HistoryItem";
 import Button from "./Button";
+import { deleteHistoryItem, clearHistory } from "../actions/history";
+import { searchRepos } from "../actions/repos";
+import { HISTORY_HIDE } from "../actions/types";
 
-const History = props => {
-    useEffect(() => {
-        document.querySelector("body").style.overflow = props.active ? "hidden" : null;
-    }, [props.active])
+const History = () => {
+    const dispatch = useDispatch();
+
+    const { historyItems, showHistory } = useSelector(state => state.history);
+
+    const closeHandler = () => {
+        dispatch({ type: HISTORY_HIDE });
+    }
 
     const itemClickHandler = name => {
-        props.closed();
-        props.itemClicked(name);
+        closeHandler();
+        dispatch(searchRepos(name));
+    }
+
+    const itemDeleteHandler = (name, date) => {
+        dispatch(deleteHistoryItem(name, date));
+    }
+
+    const clearHandler = () => {
+        dispatch(clearHistory());
     }
 
     const sortByDate = list => {
@@ -20,7 +36,7 @@ const History = props => {
 
     const historyDates = () => {
         const dates = [];
-        props.history.forEach(historyItem => {
+        historyItems.forEach(historyItem => {
             const date = moment(historyItem.date).format("LL");
             const existingDateItem = dates.find(dateItem => dateItem.date === date);
             if (existingDateItem) {
@@ -36,18 +52,22 @@ const History = props => {
         return dates;
     }
 
+    useEffect(() => {
+        document.querySelector("body").style.overflow = showHistory ? "hidden" : null;
+    }, [showHistory])
+
     return (
-        <div className={props.active ? "history active" : "history"}>
+        <div className={showHistory ? "history active" : "history"}>
             <div className="history__wrapper">
                 <div className="history__top">
                     <h1 className="history__heading">Search History</h1>
-                    <i className="history__close fas fa-times" onClick={props.closed} />
+                    <i className="history__close fas fa-times" onClick={closeHandler} />
                 </div>
-                {props.history.length === 0 ?
+                {historyItems.length === 0 ?
                     <p className="history__empty">You don't have any searches yet.</p> :
                     <Aux>
                         <div className="history__clear">
-                            <Button wide text="Clear history" clicked={props.cleared} />
+                            <Button wide text="Clear history" clicked={clearHandler} />
                         </div>
                         <div className="history__content">
                             {historyDates().map(dateItem => (
@@ -59,7 +79,7 @@ const History = props => {
                                             item={historyItem.name}
                                             clicked={itemClickHandler}
                                             onDelete={() =>
-                                                props.itemDeleted(historyItem.name, historyItem.date)}
+                                                itemDeleteHandler(historyItem.name, historyItem.date)}
                                         />
                                     )}
                                 </div>

@@ -1,4 +1,5 @@
 import React from "react";
+import { useSelector } from "react-redux";
 import Fade from "react-reveal/Fade";
 import theme from "../utility/theme";
 import { ThemeProvider } from "@material-ui/styles";
@@ -6,10 +7,12 @@ import Paper from "@material-ui/core/Paper";
 import { Chart, BarSeries, ArgumentAxis, ValueAxis } from "@devexpress/dx-react-chart-material-ui";
 import { Animation } from "@devexpress/dx-react-chart";
 
-const YearsChart = props => {
+const YearsChart = () => {
+    const { repos } = useSelector(state => state.repos);
+
     const yearsData = () => {
         const years = [];
-        props.repos.forEach(repo => {
+        repos.forEach(repo => {
             const year = new Date(repo.created_at).getFullYear().toString();
             const existingYearItem = years.find(item => item.year === year);
             if (existingYearItem) {

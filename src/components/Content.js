@@ -30,7 +30,7 @@ const a11yProps = index => ({
     'aria-controls': `simple-tabpanel-${index}`
 })
 
-const Content = props => {
+const Content = () => {
     const [value, setValue] = useState(0);
 
     const changeHandler = (event, newValue) => {
@@ -48,10 +48,10 @@ const Content = props => {
                 </AppBar>
             </ThemeProvider>
             <TabPanel value={value} index={0}>
-                <Timeline repos={props.repos} />
+                <Timeline />
             </TabPanel>
             <TabPanel value={value} index={1}>
-                <YearsChart repos={props.repos} />
+                <YearsChart />
             </TabPanel>
         </Aux>
     )

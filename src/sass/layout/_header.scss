@@ -41,10 +41,10 @@
   }
 
   &__history-icon {
-    display: none;
+    display: none !important;
 
     @include respond(mobile) {
-      display: block;
+      display: block !important;
       font-size: 2rem;
     }
   }

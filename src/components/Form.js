@@ -1,12 +1,16 @@
 import React, { useState, useEffect, useRef } from "react";
+import { useDispatch } from "react-redux";
 import Paper from "@material-ui/core/Paper";
 import Button from "./Button";
+import { searchRepos } from "../actions/repos";
 
-const Form = props => {
+const Form = () => {
     const [username, setUsername] = useState("");
     const [focused, setFocused] = useState(false);
     const [error, setError] = useState(false);
     const shouldValidate = useRef(false);
+
+    const dispatch = useDispatch();
 
     const changeHandler = event => {
         const { value } = event.target;
@@ -16,7 +20,7 @@ const Form = props => {
 
     const submitHandler = event => {
         event.preventDefault();
-        props.submit(username.trim());
+        dispatch(searchRepos(username.trim()));
         shouldValidate.current = username.trim() === "";
         setError(username.trim() === "");
         setUsername("");
