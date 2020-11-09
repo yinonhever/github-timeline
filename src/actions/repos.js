@@ -21,11 +21,11 @@ export const searchRepos = input => async (dispatch, getState) => {
             const reposReq = axios.get(`https://api.github.com/users/${input}/repos?page=1&per_page=100`);
             const profileReq = axios.get(`https://api.github.com/search/users?q=${input}`);
 
-            const responses = await axios.all([reposReq, profileReq]);
-            const [reposRes, profileRes] = responses;
+            const [reposRes, profileRes] = await axios.all([reposReq, profileReq]);
 
             const matchingProfile = profileRes.data.items.find(item =>
-                item.login.toLowerCase() === input.toLowerCase());
+                item.login.toLowerCase() === input.toLowerCase()
+            );
 
             if (!matchingProfile) {
                 dispatch({ type: REPOS_SEARCH_NOT_FOUND });
@@ -51,7 +51,7 @@ export const searchRepos = input => async (dispatch, getState) => {
                     });
                 }
 
-                dispatch(addHistoryItem(matchingProfile.login));
+                dispatch(addHistoryItem(user.name));
             }
         }
         catch {
