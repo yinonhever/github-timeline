@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import Paper from "@material-ui/core/Paper";
 import Button from "./Button";
 import { searchRepos } from "../actions/repos";
@@ -12,8 +12,7 @@ const Form = () => {
 
     const dispatch = useDispatch();
 
-    const changeHandler = event => {
-        const { value } = event.target;
+    const changeHandler = ({ target: { value } }) => {
         setUsername(value);
         setError(value.trim() === "" && shouldValidate.current);
     }
@@ -21,17 +20,18 @@ const Form = () => {
     const submitHandler = event => {
         event.preventDefault();
         dispatch(searchRepos(username.trim()));
+
         shouldValidate.current = username.trim() === "";
         setError(username.trim() === "");
         setUsername("");
     }
 
+    const { loading } = useSelector(state => state.repos);
     useEffect(() => {
-        const historyItems = document.getElementsByClassName("history__item-text");
-        for (let i = 0; i < historyItems.length; i++) {
-            historyItems[i].addEventListener("click", () => setError(false));
+        if (loading) {
+            setError(false);
         }
-    }, [error])
+    }, [loading])
 
     return (
         <Paper elevation={24} style={{
