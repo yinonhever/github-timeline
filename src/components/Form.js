@@ -30,6 +30,7 @@ const Form = () => {
     useEffect(() => {
         if (loading) {
             setError(false);
+            shouldValidate.current = false;
         }
     }, [loading])
 
@@ -39,7 +40,7 @@ const Form = () => {
             backgroundColor: "transparent"
         }}>
             <form className={!error ? "form" : "form form--error"} onSubmit={submitHandler}>
-                <div className={"form__content"}>
+                <div className="form__content">
                     <div className={focused ? "form__input-wrapper focused" : "form__input-wrapper"}>
                         <input
                             className="form__input"
