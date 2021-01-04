@@ -1,6 +1,6 @@
 .timeline {
   max-width: 120rem;
-  margin: auto;
+  margin: 6rem auto;
   display: flex;
   flex-direction: column;
   position: relative;
@@ -250,6 +250,20 @@
     &:hover .button__icon {
       opacity: 1;
       text-indent: 0;
+    }
+  }
+}
+
+.react-pagination-js-border-bottom {
+  display: flex;
+  justify-content: center;
+  margin: 0 -7vw;
+
+  ul {
+    font-size: 1.5rem;
+
+    @include respond(mobile) {
+      font-size: 1.4rem;
     }
   }
 }
