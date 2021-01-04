@@ -266,4 +266,15 @@
       font-size: 1.4rem;
     }
   }
+
+  li {
+    &.is-active {
+      color: $color-azure;
+      border-bottom: 1px solid $color-azure;
+    }
+
+    &.page:hover {
+      border-bottom: 1px solid $color-azure;
+    }
+  }
 }
