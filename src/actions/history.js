@@ -39,7 +39,12 @@ export const deleteHistoryItem = (name, date) => (dispatch, getState) => {
     localStorage.setItem("history", JSON.stringify(newHistory));
 }
 
-export const clearHistory = () => dispatch => {
-    dispatch({ type: HISTORY_CLEAR });
-    localStorage.setItem("history", JSON.stringify([]));
+export const clearHistory = () => (dispatch, getState) => {
+    const { history: { historyItems } } = getState();
+    const confirmed = historyItems.length < 2 ||
+        window.confirm("Are you sure you want to delete all history?");
+    if (confirmed) {
+        dispatch({ type: HISTORY_CLEAR });
+        localStorage.setItem("history", JSON.stringify([]));
+    }
 }
